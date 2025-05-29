@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6.0
+    restart: unless-stopped
+    container_name: taskmate-mongo
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - 27017:27017
+
+  backend:
+    build:
+      context: ./taskmate-backend
+    container_name: taskmate-backend
+    restart: unless-stopped
+    ports:
+      - 4000:4000
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/taskmate
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./taskmate-frontend
+    container_name: taskmate-frontend
+    restart: unless-stopped
+    ports:
+      - 3000:80
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
