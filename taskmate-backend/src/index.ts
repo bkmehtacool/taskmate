@@ -5,13 +5,14 @@ import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 4000;
+const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/taskmate';
 
 app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB connection
 mongoose
-	.connect('mongodb://localhost:27017/taskmate', {
+	.connect(mongoUrl, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	} as mongoose.ConnectOptions)
