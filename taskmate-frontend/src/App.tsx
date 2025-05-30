@@ -41,7 +41,7 @@ const App = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-100 p-4">
-			<h1 className="text-2xl font-bold mb-4">TaskMate</h1>
+			<h1 className="text-2xl font-bold mb-4">TaskMate </h1>
 			<div className="flex gap-2 mb-4">
 				<input
 					type="text"
