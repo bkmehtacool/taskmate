@@ -40,3 +40,16 @@ jobs:
       - name: ✅ Run tests (optional)
         run: npm test
         continue-on-error: true
+
+      - name: 🐳 Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: 📦 Build Docker image
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${{ matrix.service }}:latest
+          docker build -t $IMAGE_NAME .
+
+      - name: 🚀 Push Docker image to GHCR
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${{ matrix.service }}:latest
+          docker push $IMAGE_NAME
