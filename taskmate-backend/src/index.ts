@@ -20,7 +20,10 @@ mongoose
 		console.log('Connected to MongoDB');
 	})
 	.catch((err) => {
-		console.error('MongoDB connection error:', err);
+		console.error(
+			'MongoDB connection error-------------------------------------------:',
+			err
+		);
 	});
 
 // Todo schema and model
